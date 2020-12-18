@@ -1,10 +1,8 @@
 'use strict';
 
-const tracker = require('./tracker');     //To get the peers list from tracker
-const torrentParser = require('./torrent-parser');  //contains code to get information out of a torrent file
+const torrentParser = require('./lib/torrent-parser');  //contains code to get information out of a torrent file
+const download = require("./lib/download")  //Get peers list and download from them
 
-const torrent = torrentParser.open('sample.torrent');
+const torrent = torrentParser.open(process.argv[2]);    //Open the torrent file and store the buffer
 
-tracker.getPeers(torrent, peers => {
-    console.log(peers);
-});
+download(torrent);
